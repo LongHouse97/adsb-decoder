@@ -16,14 +16,21 @@
 using namespace aviware::adsb;
 
 AdsbCore::AdsbCore(const std::string& data) :
-    m_data(data)
+    m_data(data),
+    m_decoder(std::make_shared<AdsbDecoder>())
 {
-    fillMessage();
+    initialize();
 }
 
 AdsbCore::~AdsbCore()
 {
 
+}
+
+void AdsbCore::initialize()
+{
+    fillMessage();
+    m_decoder->setMessage(&m_message);
 }
 
 void AdsbCore::fillMessage()
@@ -97,7 +104,7 @@ void AdsbCore::fillMessage()
 void AdsbCore::printMessage()
 {
     int format = 0;
-    AdsbDecoder::get().downlinkFormat(format, &m_message);
+    m_decoder->downlinkFormat(format);
     if(format == 17)
     {
         std::cout << "Downlink Format: " << format << " (ADS-B Message)" << std::endl;
@@ -109,16 +116,16 @@ void AdsbCore::printMessage()
     
     int typeCode = 0;
     std::string tcContent = "";
-    AdsbDecoder::get().typeCode(typeCode, tcContent, &m_message);
+    m_decoder->typeCode(typeCode, tcContent);
     std::cout << "TypeCode: " << typeCode << " | " << tcContent << std::endl;
 
     char callsign[9];
-    AdsbDecoder::get().callsign(callsign, &m_message);
+    m_decoder->callsign(callsign);
     std::cout << "Callsign: " << callsign << std::endl;
 
     int emitterCode = 0;
     std::string ecContent = "";
-    AdsbDecoder::get().emitterCategory(emitterCode, ecContent, &m_message);
+    m_decoder->emitterCategory(emitterCode, ecContent);
     std::cout << "Emitter Code: " << emitterCode << " | " << ecContent << std::endl;
 
 }

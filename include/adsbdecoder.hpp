@@ -7,6 +7,7 @@
 
 #include <string>
 
+
 namespace aviware
 {
     namespace adsb
@@ -16,21 +17,23 @@ namespace aviware
         class AdsbDecoder
         {
         public:
-            static AdsbDecoder& get();
+            AdsbDecoder();
 
-            AdsbDecoder(AdsbDecoder const&) = delete;
+            ~AdsbDecoder();
 
-            void operator=(AdsbDecoder const&) = delete;
+            void setMessage(AdsbMessage* message) { m_message = message; }
 
-            void callsign(char* callsign, AdsbMessage* message);
+            void callsign(char* callsign);
 
-            void downlinkFormat(int &format, AdsbMessage* message);
+            void downlinkFormat(int &format);
 
-            void typeCode(int &code, std::string &content, AdsbMessage* message);
+            void typeCode(int &code, std::string &content);
 
-            void emitterCategory(int &code, std::string &category, AdsbMessage* message);
+            void emitterCategory(int &code, std::string &category);
+
         private:
-            AdsbDecoder() {}
+
+            AdsbMessage* m_message;
 
         }; // class AdsbDecoder;
     } // namespace adsb

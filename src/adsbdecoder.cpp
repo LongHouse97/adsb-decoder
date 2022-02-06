@@ -5,57 +5,79 @@
 // Date: 06 Feb 2022
 //
 
+#include <iostream>
+
 #include "adsbdecoder.hpp"
 #include "adsbmessage.hpp"
 
 using namespace aviware::adsb;
 
-AdsbDecoder& AdsbDecoder::get()
+AdsbDecoder::AdsbDecoder()
 {
-    static AdsbDecoder instance;
 
-    return instance;
 }
 
-void AdsbDecoder::callsign(char* callsign, AdsbMessage* message)
+AdsbDecoder::~AdsbDecoder()
 {
+
+}
+
+void AdsbDecoder::callsign(char* callsign)
+{
+    if (!m_message)
+    {
+        std::cout << "Error: Message not Set!\n";
+        return;
+    }
+    
+
     callsign[8] = '\0';
 
-    message->data.c1.to_ulong() < 27 ? 
-        callsign[0] = char(message->data.c1.to_ulong() + 64) :
-        callsign[0] = char(message->data.c1.to_ulong());
-    message->data.c2.to_ulong() < 27 ? 
-        callsign[1] = char(message->data.c2.to_ulong() + 64) :
-        callsign[1] = char(message->data.c2.to_ulong());
-    message->data.c3.to_ulong() < 27 ? 
-        callsign[2] = char(message->data.c3.to_ulong() + 64) :
-        callsign[2] = char(message->data.c3.to_ulong());
-    message->data.c4.to_ulong() < 27 ? 
-        callsign[3] = char(message->data.c4.to_ulong() + 64) :
-        callsign[3] = char(message->data.c4.to_ulong());
-    message->data.c5.to_ulong() < 27 ? 
-        callsign[4] = char(message->data.c5.to_ulong() + 64) :
-        callsign[4] = char(message->data.c5.to_ulong());
-    message->data.c6.to_ulong() < 27 ? 
-        callsign[5] = char(message->data.c6.to_ulong() + 64) :
-        callsign[5] = char(message->data.c6.to_ulong());
-    message->data.c7.to_ulong() < 27 ? 
-        callsign[6] = char(message->data.c7.to_ulong() + 64) :
-        callsign[6] = char(message->data.c7.to_ulong());
-    message->data.c8.to_ulong() < 27 ? 
-        callsign[7] = char(message->data.c8.to_ulong() + 64) :
-        callsign[7] = char(message->data.c8.to_ulong());
+    m_message->data.c1.to_ulong() < 27 ? 
+        callsign[0] = char(m_message->data.c1.to_ulong() + 64) :
+        callsign[0] = char(m_message->data.c1.to_ulong());
+    m_message->data.c2.to_ulong() < 27 ? 
+        callsign[1] = char(m_message->data.c2.to_ulong() + 64) :
+        callsign[1] = char(m_message->data.c2.to_ulong());
+    m_message->data.c3.to_ulong() < 27 ? 
+        callsign[2] = char(m_message->data.c3.to_ulong() + 64) :
+        callsign[2] = char(m_message->data.c3.to_ulong());
+    m_message->data.c4.to_ulong() < 27 ? 
+        callsign[3] = char(m_message->data.c4.to_ulong() + 64) :
+        callsign[3] = char(m_message->data.c4.to_ulong());
+    m_message->data.c5.to_ulong() < 27 ? 
+        callsign[4] = char(m_message->data.c5.to_ulong() + 64) :
+        callsign[4] = char(m_message->data.c5.to_ulong());
+    m_message->data.c6.to_ulong() < 27 ? 
+        callsign[5] = char(m_message->data.c6.to_ulong() + 64) :
+        callsign[5] = char(m_message->data.c6.to_ulong());
+    m_message->data.c7.to_ulong() < 27 ? 
+        callsign[6] = char(m_message->data.c7.to_ulong() + 64) :
+        callsign[6] = char(m_message->data.c7.to_ulong());
+    m_message->data.c8.to_ulong() < 27 ? 
+        callsign[7] = char(m_message->data.c8.to_ulong() + 64) :
+        callsign[7] = char(m_message->data.c8.to_ulong());
 }
 
-void AdsbDecoder::downlinkFormat(int &format, AdsbMessage* message)
+void AdsbDecoder::downlinkFormat(int &format)
 {
-    format = message->format.data.to_ulong();
+    if (!m_message)
+    {
+        std::cout << "Error: Message not Set!\n";
+        return;
+    }
+    format = m_message->format.data.to_ulong();
 }
 
-void AdsbDecoder::typeCode(int &code, std::string &content, AdsbMessage* message)
+void AdsbDecoder::typeCode(int &code, std::string &content)
 {
-    code = message->data.tc.to_ulong();
-
+    if (!m_message)
+    {
+        std::cout << "Error: Message not Set!\n";
+        return;
+    }
+    code = m_message->data.tc.to_ulong();
+    code = 1;
     switch (code)
     {
     case 1:
@@ -107,9 +129,14 @@ void AdsbDecoder::typeCode(int &code, std::string &content, AdsbMessage* message
     }
 }
 
-void AdsbDecoder::emitterCategory(int &code, std::string &category, AdsbMessage* message)
+void AdsbDecoder::emitterCategory(int &code, std::string &category)
 {
-    code = message->data.ec.to_ulong();
+    if (!m_message)
+    {
+        std::cout << "Error: Message not Set!\n";
+        return;
+    }
+    code = m_message->data.ec.to_ulong();
 
     switch (code)
     {

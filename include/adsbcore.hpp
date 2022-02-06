@@ -7,6 +7,7 @@
 
 #include <string>
 
+#include "adsbdecoderfwd.hpp"
 #include "adsbmessage.hpp"
 
 namespace aviware
@@ -23,6 +24,8 @@ namespace aviware
             void printMessage();
         private:
             
+            void initialize();
+
             void fillMessage();
 
             void decode();
@@ -30,6 +33,8 @@ namespace aviware
             std::string m_data;
 
             AdsbMessage m_message;
+
+            AdsbDecoderPtr m_decoder = nullptr;
         }; // class AdsbCore
     } // namespace adsb
     
