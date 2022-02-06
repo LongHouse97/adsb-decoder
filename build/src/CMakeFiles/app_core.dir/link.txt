@@ -1,1 +1,0 @@
-/Library/Developer/CommandLineTools/usr/bin/c++  -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk -dynamiclib -Wl,-headerpad_max_install_names -o libapp_core.dylib -install_name @rpath/libapp_core.dylib CMakeFiles/app_core.dir/adsbcore.cpp.o CMakeFiles/app_core.dir/adsbdecoder.cpp.o 

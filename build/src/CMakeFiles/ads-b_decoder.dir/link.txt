@@ -1,1 +1,0 @@
-/Library/Developer/CommandLineTools/usr/bin/c++  -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/ads-b_decoder.dir/main.cpp.o -o ads-b_decoder  -Wl,-rpath,/Users/arianghoddousi/dev/AviationProjects/adsb-decoder/build/src libapp_core.dylib 

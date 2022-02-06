@@ -1,8 +1,0 @@
-/Users/arianghoddousi/dev/AviationProjects/adsb-decoder/build/CMakeFiles/rebuild_cache.dir
-/Users/arianghoddousi/dev/AviationProjects/adsb-decoder/build/CMakeFiles/edit_cache.dir
-/Users/arianghoddousi/dev/AviationProjects/adsb-decoder/build/CMakeFiles/test.dir
-/Users/arianghoddousi/dev/AviationProjects/adsb-decoder/build/src/CMakeFiles/rebuild_cache.dir
-/Users/arianghoddousi/dev/AviationProjects/adsb-decoder/build/src/CMakeFiles/edit_cache.dir
-/Users/arianghoddousi/dev/AviationProjects/adsb-decoder/build/src/CMakeFiles/test.dir
-/Users/arianghoddousi/dev/AviationProjects/adsb-decoder/build/src/CMakeFiles/ads-b_decoder.dir
-/Users/arianghoddousi/dev/AviationProjects/adsb-decoder/build/src/CMakeFiles/app_core.dir
