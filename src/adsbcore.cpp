@@ -15,11 +15,10 @@
 
 using namespace aviware::adsb;
 
-AdsbCore::AdsbCore(const std::string& data) :
-    m_data(data),
+AdsbCore::AdsbCore() :
     m_decoder(std::make_shared<AdsbDecoder>())
 {
-    initialize();
+
 }
 
 AdsbCore::~AdsbCore()
@@ -27,14 +26,8 @@ AdsbCore::~AdsbCore()
 
 }
 
-void AdsbCore::initialize()
-{
-    compute();
-}
-
 void AdsbCore::compute()
 {
-    createRawMessage();
     m_decoder->setMessage(&m_message);
 }
 

@@ -21,8 +21,10 @@ int main(int argc, char** argv)
         data = argv[1];
     }
     // instantiate core 
-    aviware::adsb::AdsbCore core(data.c_str());
-
+    aviware::adsb::AdsbCore core;
+    core.setData(data.c_str());
+    core.compute();
+    
     // print ADS-B Message on console
     core.printMessage();
 

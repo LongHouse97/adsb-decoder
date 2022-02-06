@@ -17,7 +17,7 @@ namespace aviware
         class AdsbCore
         {
         public:
-            AdsbCore(const std::string& data);
+            AdsbCore();
 
             ~AdsbCore();
 
