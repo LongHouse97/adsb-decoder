@@ -29,13 +29,13 @@ AdsbCore::~AdsbCore()
 
 void AdsbCore::initialize()
 {
-    fillMessage();
-    m_decoder->setMessage(&m_message);
+    compute();
 }
 
-void AdsbCore::update()
+void AdsbCore::compute()
 {
     fillMessage();
+    m_message.compute();
     m_decoder->setMessage(&m_message);
 }
 
@@ -46,6 +46,8 @@ void AdsbCore::fillMessage()
     std::bitset<count> data;
     std::bitset<4> tempData;
 
+
+    // Compute Bitset from Hex Data
     for (size_t i = 0; i < 28; i++)
     {
         int value;
@@ -62,6 +64,8 @@ void AdsbCore::fillMessage()
         }
     }
 
+    // Fill Data fields
+
     for (size_t i = 0; i < 5; i++)
     {
         m_message.format.data[i] = data[i];
@@ -77,27 +81,6 @@ void AdsbCore::fillMessage()
     for (size_t i = 0; i < 56; i++)
     {
         m_message.data.data[i] = data[i + 32];
-    }
-
-    int cOffset = 8;
-    for (size_t i = 0; i < 8; i++)
-    {
-        for (size_t j = 0; j < 6; j++)
-        {
-            m_message.data.content.at(i)[5 - j] = m_message.data.data[j + cOffset];
-        }
-        cOffset += 6;
-    }
-    
-
-    for (size_t i = 0; i < 5; i++)
-    {
-        m_message.data.tc[i] = m_message.data.data[i];
-    }
-    
-    for (size_t i = 0; i < 3; i++)
-    {
-        m_message.data.ec[i] = m_message.data.data[i + 5];
     }
     
     for (size_t i = 0; i < 24; i++)

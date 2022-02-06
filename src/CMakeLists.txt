@@ -11,6 +11,7 @@ target_sources(app_core
     PRIVATE
         adsbcore.cpp
         adsbdecoder.cpp
+        adsbmessage.cpp
 )
 
 target_include_directories(app_core

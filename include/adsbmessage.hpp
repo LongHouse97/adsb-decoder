@@ -13,45 +13,49 @@ namespace aviware
 {
     namespace adsb
     {
-        struct DownlinkFormat
+        struct AdsbDownlinkFormat
         {
             std::bitset<5> data;
         }; // struct DownlinkFormat
 
-        struct Capability
+        struct AdsbCapability
         {
             std::bitset<3> data;
         }; // struct Capability
 
-        struct IcaoAircraftAddress
+        struct AdsbIcaoAircraftAddress
         {
             std::bitset<24> data;
         }; // struct IcaoAircraftAddress
 
-        struct Data
+        struct AdsbData
         {
+            void compute();
+
             std::bitset<56> data;
             std::bitset<5> tc;
             std::bitset<3> ec;
             std::array<std::bitset<6>, 8> content;
         }; // struct Data
 
-        struct Parity
+        struct AdsbParity
         {
             std::bitset<24> data;
         }; // struct Parity
 
         struct AdsbMessage
         {
-            DownlinkFormat format;
+            void compute();
 
-            Capability capability;
+            AdsbDownlinkFormat format;
 
-            IcaoAircraftAddress address;
+            AdsbCapability capability;
 
-            Data data;
+            AdsbIcaoAircraftAddress address;
 
-            Parity parity;
+            AdsbData data;
+
+            AdsbParity parity;
         }; // struct AdsbMessage
 
     } // namespace adsb

@@ -25,7 +25,7 @@ namespace aviware
 
             void setData(const std::string& data) { m_data = data; }
 
-            void update();
+            void compute();
         private:
             
             void initialize();
