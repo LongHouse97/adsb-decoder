@@ -23,16 +23,14 @@ namespace aviware
 
             void printMessage();
 
-            void setData(const std::string& data) { m_data = data; }
+            void setData(const std::string& data);
 
             void compute();
         private:
             
             void initialize();
 
-            void fillMessage();
-
-            void decode();
+            void createRawMessage();
 
             std::string m_data;
 

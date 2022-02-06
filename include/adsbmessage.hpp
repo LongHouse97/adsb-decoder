@@ -47,6 +47,8 @@ namespace aviware
         {
             void compute();
 
+            void setRawMessage(std::bitset<112> message);
+
             AdsbDownlinkFormat format;
 
             AdsbCapability capability;

@@ -34,18 +34,22 @@ void AdsbCore::initialize()
 
 void AdsbCore::compute()
 {
-    fillMessage();
-    m_message.compute();
+    createRawMessage();
     m_decoder->setMessage(&m_message);
 }
 
-void AdsbCore::fillMessage()
+void AdsbCore::setData(const std::string& data)
+{
+    m_data = data;
+    createRawMessage();
+}
+
+void AdsbCore::createRawMessage()
 {
     constexpr size_t count = 112;
     constexpr size_t offset = 4;
-    std::bitset<count> data;
+    std::bitset<count> rawMessage;
     std::bitset<4> tempData;
-
 
     // Compute Bitset from Hex Data
     for (size_t i = 0; i < 28; i++)
@@ -60,33 +64,11 @@ void AdsbCore::fillMessage()
         
         for (size_t j = 0; j < offset; j++)
         {
-            data[j + i * offset] = tempData[3 - j];
+            rawMessage[j + i * offset] = tempData[3 - j];
         }
     }
 
-    // Fill Data fields
-
-    for (size_t i = 0; i < 5; i++)
-    {
-        m_message.format.data[i] = data[i];
-    }
-    for (size_t i = 0; i < 3; i++)
-    {
-        m_message.capability.data[i] = data[i + 5];
-    }
-    for (size_t i = 0; i < 24; i++)
-    {
-        m_message.address.data[i] = data[i + 8];
-    }
-    for (size_t i = 0; i < 56; i++)
-    {
-        m_message.data.data[i] = data[i + 32];
-    }
-    
-    for (size_t i = 0; i < 24; i++)
-    {
-        m_message.parity.data[i] = data[i + 88];
-    }
+    m_message.setRawMessage(rawMessage);    
 }
 
 void AdsbCore::printMessage()
