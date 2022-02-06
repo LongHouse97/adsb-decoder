@@ -5,10 +5,14 @@
 // Date: 06 Feb 2022
 //
 
+
+
 namespace aviware
 {
     namespace adsb
     {
+        struct AdsbMessage;
+
         class AdsbDecoder
         {
         public:
@@ -17,6 +21,12 @@ namespace aviware
             AdsbDecoder(AdsbDecoder const&) = delete;
 
             void operator=(AdsbDecoder const&) = delete;
+
+            void callsign(char* callsign, AdsbMessage* message);
+
+            void downlinkFormat(int &format, AdsbMessage* message);
+
+            void typeCode(int &code, char* content, AdsbMessage* message);
         private:
             AdsbDecoder() {}
 
