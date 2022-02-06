@@ -22,6 +22,10 @@ namespace aviware
             ~AdsbCore();
 
             void printMessage();
+
+            void setData(const std::string& data) { m_data = data; }
+
+            void update();
         private:
             
             void initialize();

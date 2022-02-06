@@ -33,6 +33,12 @@ void AdsbCore::initialize()
     m_decoder->setMessage(&m_message);
 }
 
+void AdsbCore::update()
+{
+    fillMessage();
+    m_decoder->setMessage(&m_message);
+}
+
 void AdsbCore::fillMessage()
 {
     constexpr size_t count = 112;
@@ -114,18 +120,14 @@ void AdsbCore::printMessage()
         return;
     }
     
-    int typeCode = 0;
-    std::string tcContent = "";
-    m_decoder->typeCode(typeCode, tcContent);
-    std::cout << "TypeCode: " << typeCode << " | " << tcContent << std::endl;
+    auto tcResult = m_decoder->typeCode();
+    std::cout << "TypeCode: " << std::get<0>(tcResult) << " | " << std::get<1>(tcResult) << std::endl;
 
     char callsign[9];
     m_decoder->callsign(callsign);
     std::cout << "Callsign: " << callsign << std::endl;
 
-    int emitterCode = 0;
-    std::string ecContent = "";
-    m_decoder->emitterCategory(emitterCode, ecContent);
-    std::cout << "Emitter Code: " << emitterCode << " | " << ecContent << std::endl;
+    auto ecResult = m_decoder->emitterCategory();
+    std::cout << "Emitter Code: " << std::get<0>(ecResult) << " | " << std::get<1>(ecResult) << std::endl;
 
 }

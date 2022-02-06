@@ -69,13 +69,60 @@ void AdsbDecoder::downlinkFormat(int &format)
     format = m_message->format.data.to_ulong();
 }
 
-void AdsbDecoder::typeCode(int &code, std::string &content)
+std::tuple<int, std::string> AdsbDecoder::emitterCategory()
 {
     if (!m_message)
     {
         std::cout << "Error: Message not Set!\n";
-        return;
+        return std::make_tuple(-1, "Error");
     }
+    int code = 0;
+    std::string category = "";
+
+    code = m_message->data.ec.to_ulong();
+
+    switch (code)
+    {
+    case 0:
+        category = "No ADS-B Emitter Category Information\0";
+        break;
+    case 1:
+        category = "Light ( < 7030kg)\0";
+        break;
+    case 2:
+        category = "Small (7030kg to 34019kg)\0";
+        break; 
+    case 3:
+        category = "Large (34020kg to 136077kg)\0";
+        break;
+    case 4:
+        category = "High-Vortex Large\0";
+        break;
+    case 5:
+        category = "Heavy ( > 136078kg)\0";
+        break;
+    case 6:
+        category = "High Performance ( > 5g accel | > 400kts)\0";
+        break;
+    case 7:
+        category = "Rotorcraft\0";
+        break;
+    default:
+        break;
+    }
+
+    return std::make_tuple(code, category);
+}
+
+std::tuple<int, std::string> AdsbDecoder::typeCode()
+{
+    if (!m_message)
+    {
+        std::cout << "Error: Message not Set!\n";
+        return std::make_tuple(-1, "Error");
+    }
+    int code = 0;
+    std::string content = "";
     code = m_message->data.tc.to_ulong();
     code = 1;
     switch (code)
@@ -127,44 +174,6 @@ void AdsbDecoder::typeCode(int &code, std::string &content)
         content = "No valid type code!\0";
         break;
     }
-}
 
-void AdsbDecoder::emitterCategory(int &code, std::string &category)
-{
-    if (!m_message)
-    {
-        std::cout << "Error: Message not Set!\n";
-        return;
-    }
-    code = m_message->data.ec.to_ulong();
-
-    switch (code)
-    {
-    case 0:
-        category = "No ADS-B Emitter Category Information\0";
-        break;
-    case 1:
-        category = "Light ( < 7030kg)\0";
-        break;
-    case 2:
-        category = "Small (7030kg to 34019kg)\0";
-        break; 
-    case 3:
-        category = "Large (34020kg to 136077kg)\0";
-        break;
-    case 4:
-        category = "High-Vortex Large\0";
-        break;
-    case 5:
-        category = "Heavy ( > 136078kg)\0";
-        break;
-    case 6:
-        category = "High Performance ( > 5g accel | > 400kts)\0";
-        break;
-    case 7:
-        category = "Rotorcraft\0";
-        break;
-    default:
-        break;
-    }
+    return std::make_tuple(code, content);
 }

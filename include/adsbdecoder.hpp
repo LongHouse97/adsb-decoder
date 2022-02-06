@@ -6,7 +6,7 @@
 //
 
 #include <string>
-
+#include <tuple>
 
 namespace aviware
 {
@@ -27,9 +27,9 @@ namespace aviware
 
             void downlinkFormat(int &format);
 
-            void typeCode(int &code, std::string &content);
+            std::tuple<int, std::string> typeCode();
 
-            void emitterCategory(int &code, std::string &category);
+            std::tuple<int, std::string> emitterCategory();
 
         private:
 
