@@ -5,7 +5,6 @@
 // Date: 06 Feb 2022
 //
 
-#include <sstream>
 #include <string>
 
 #include "adsbcore.hpp"
@@ -24,7 +23,7 @@ int main(int argc, char** argv)
     aviware::adsb::AdsbCore core;
     core.setData(data.c_str());
     core.compute();
-    
+
     // print ADS-B Message on console
     core.printMessage();
 
