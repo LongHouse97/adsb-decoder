@@ -29,34 +29,16 @@ void AdsbDecoder::callsign(char* callsign)
         std::cout << "Error: Message not Set!\n";
         return;
     }
-    
 
     callsign[8] = '\0';
 
-    m_message->data.c1.to_ulong() < 27 ? 
-        callsign[0] = char(m_message->data.c1.to_ulong() + 64) :
-        callsign[0] = char(m_message->data.c1.to_ulong());
-    m_message->data.c2.to_ulong() < 27 ? 
-        callsign[1] = char(m_message->data.c2.to_ulong() + 64) :
-        callsign[1] = char(m_message->data.c2.to_ulong());
-    m_message->data.c3.to_ulong() < 27 ? 
-        callsign[2] = char(m_message->data.c3.to_ulong() + 64) :
-        callsign[2] = char(m_message->data.c3.to_ulong());
-    m_message->data.c4.to_ulong() < 27 ? 
-        callsign[3] = char(m_message->data.c4.to_ulong() + 64) :
-        callsign[3] = char(m_message->data.c4.to_ulong());
-    m_message->data.c5.to_ulong() < 27 ? 
-        callsign[4] = char(m_message->data.c5.to_ulong() + 64) :
-        callsign[4] = char(m_message->data.c5.to_ulong());
-    m_message->data.c6.to_ulong() < 27 ? 
-        callsign[5] = char(m_message->data.c6.to_ulong() + 64) :
-        callsign[5] = char(m_message->data.c6.to_ulong());
-    m_message->data.c7.to_ulong() < 27 ? 
-        callsign[6] = char(m_message->data.c7.to_ulong() + 64) :
-        callsign[6] = char(m_message->data.c7.to_ulong());
-    m_message->data.c8.to_ulong() < 27 ? 
-        callsign[7] = char(m_message->data.c8.to_ulong() + 64) :
-        callsign[7] = char(m_message->data.c8.to_ulong());
+    for (size_t i = 0; i < 8; i++)
+    {
+        m_message->data.content.at(i).to_ulong() < 27 ?
+            callsign[i] = char(m_message->data.content.at(i).to_ulong() + 64) :
+            callsign[i] = char(m_message->data.content.at(i).to_ulong());
+    }
+    
 }
 
 void AdsbDecoder::downlinkFormat(int &format)

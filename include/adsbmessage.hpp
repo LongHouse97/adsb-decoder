@@ -5,6 +5,7 @@
 // Date: 06 Feb 2022
 //
 
+#include <array>
 #include <bitset>
 #include <cstdint>
 
@@ -32,14 +33,7 @@ namespace aviware
             std::bitset<56> data;
             std::bitset<5> tc;
             std::bitset<3> ec;
-            std::bitset<6> c1;
-            std::bitset<6> c2;
-            std::bitset<6> c3;
-            std::bitset<6> c4;
-            std::bitset<6> c5;
-            std::bitset<6> c6;
-            std::bitset<6> c7;
-            std::bitset<6> c8;
+            std::array<std::bitset<6>, 8> content;
         }; // struct Data
 
         struct Parity

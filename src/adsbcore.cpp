@@ -79,17 +79,16 @@ void AdsbCore::fillMessage()
         m_message.data.data[i] = data[i + 32];
     }
 
-    for (size_t i = 0; i < 6; i++)
+    int cOffset = 8;
+    for (size_t i = 0; i < 8; i++)
     {
-        m_message.data.c1[5 - i] = m_message.data.data[i + 8];
-        m_message.data.c2[5 - i] = m_message.data.data[i + 14];
-        m_message.data.c3[5 - i] = m_message.data.data[i + 20];
-        m_message.data.c4[5 - i] = m_message.data.data[i + 26];
-        m_message.data.c5[5 - i] = m_message.data.data[i + 32];
-        m_message.data.c6[5 - i] = m_message.data.data[i + 38];
-        m_message.data.c7[5 - i] = m_message.data.data[i + 44];
-        m_message.data.c8[5 - i] = m_message.data.data[i + 50]; 
+        for (size_t j = 0; j < 6; j++)
+        {
+            m_message.data.content.at(i)[5 - j] = m_message.data.data[j + cOffset];
+        }
+        cOffset += 6;
     }
+    
 
     for (size_t i = 0; i < 5; i++)
     {
