@@ -51,3 +51,93 @@ void AdsbDecoder::downlinkFormat(int &format, AdsbMessage* message)
 {
     format = message->format.data.to_ulong();
 }
+
+void AdsbDecoder::typeCode(int &code, std::string &content, AdsbMessage* message)
+{
+    code = message->data.tc.to_ulong();
+
+    switch (code)
+    {
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+        content = "Aircraft identification\0";
+        break;
+    case 5:
+    case 6:
+    case 7:
+    case 8:
+        content = "Surface position\0";
+        break;
+    case 9:
+    case 10:
+    case 11:
+    case 12:
+    case 13:
+    case 14:
+    case 15:
+    case 16:
+    case 17:
+    case 18:
+        content = "Airborne position (w/ Baro Altitude)\0";
+        break;
+    case 19:
+        content = "Airborne velocities\0";
+        break;
+    case 20:
+    case 21:
+    case 22:
+        content = "Airborne position (w/ GNSS Height)\0";
+        break;
+    case 23:
+    case 24:
+    case 25:
+    case 26:
+    case 27:
+    case 28:
+    case 29:
+    case 30:
+    case 31:
+        content = "Reserved for other uses\0";
+        break;
+    default:
+        content = "No valid type code!\0";
+        break;
+    }
+}
+
+void AdsbDecoder::emitterCategory(int &code, std::string &category, AdsbMessage* message)
+{
+    code = message->data.ec.to_ulong();
+
+    switch (code)
+    {
+    case 0:
+        category = "No ADS-B Emitter Category Information\0";
+        break;
+    case 1:
+        category = "Light ( < 7030kg)\0";
+        break;
+    case 2:
+        category = "Small (7030kg to 34019kg)\0";
+        break; 
+    case 3:
+        category = "Large (34020kg to 136077kg)\0";
+        break;
+    case 4:
+        category = "High-Vortex Large\0";
+        break;
+    case 5:
+        category = "Heavy ( > 136078kg)\0";
+        break;
+    case 6:
+        category = "High Performance ( > 5g accel | > 400kts)\0";
+        break;
+    case 7:
+        category = "Rotorcraft\0";
+        break;
+    default:
+        break;
+    }
+}

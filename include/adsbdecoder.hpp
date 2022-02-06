@@ -5,7 +5,7 @@
 // Date: 06 Feb 2022
 //
 
-
+#include <string>
 
 namespace aviware
 {
@@ -26,7 +26,9 @@ namespace aviware
 
             void downlinkFormat(int &format, AdsbMessage* message);
 
-            void typeCode(int &code, char* content, AdsbMessage* message);
+            void typeCode(int &code, std::string &content, AdsbMessage* message);
+
+            void emitterCategory(int &code, std::string &category, AdsbMessage* message);
         private:
             AdsbDecoder() {}
 

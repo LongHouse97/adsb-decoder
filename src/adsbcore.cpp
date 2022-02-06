@@ -8,6 +8,7 @@
 #include <bitset>
 #include <iostream>
 #include <sstream>
+#include <string>
 
 #include "adsbcore.hpp"
 #include "adsbdecoder.hpp"
@@ -106,9 +107,18 @@ void AdsbCore::printMessage()
         return;
     }
     
+    int typeCode = 0;
+    std::string tcContent = "";
+    AdsbDecoder::get().typeCode(typeCode, tcContent, &m_message);
+    std::cout << "TypeCode: " << typeCode << " | " << tcContent << std::endl;
+
     char callsign[9];
     AdsbDecoder::get().callsign(callsign, &m_message);
     std::cout << "Callsign: " << callsign << std::endl;
 
-    
+    int emitterCode = 0;
+    std::string ecContent = "";
+    AdsbDecoder::get().emitterCategory(emitterCode, ecContent, &m_message);
+    std::cout << "Emitter Code: " << emitterCode << " | " << ecContent << std::endl;
+
 }
