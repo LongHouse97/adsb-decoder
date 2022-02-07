@@ -7,8 +7,7 @@
 
 #include <string>
 
-#include "adsbdecoderfwd.hpp"
-#include "adsbmessage.hpp"
+#include "adsbhandlerfwd.hpp"
 
 namespace aviware
 {
@@ -21,22 +20,18 @@ namespace aviware
 
             ~AdsbCore();
 
-            void printMessage();
+            void setData(const std::string &data);
 
-            void setData(const std::string& data);
+            void setData();
 
-            void compute();
+            void update();
+
         private:
-            
-            void initialize();
 
-            void createRawMessage();
+            AdsbHandlerPtr m_handler = nullptr;
 
             std::string m_data;
 
-            AdsbMessage m_message;
-
-            AdsbDecoderPtr m_decoder = nullptr;
         }; // class AdsbCore
     } // namespace adsb
     

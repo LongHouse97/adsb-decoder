@@ -20,6 +20,7 @@ void AdsbMessage::setRawMessage(std::bitset<112> message)
     {
         format.data[i] = message[i];
     }
+
     for (size_t i = 0; i < 3; i++)
     {
         capability.data[i] = message[i + 5];
