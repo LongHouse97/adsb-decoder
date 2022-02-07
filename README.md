@@ -23,14 +23,24 @@ Go to your development directory and clone the repository from github:
 
 ### Build and Install
 
+For unix systems (Linux, Mac OS X):
 Build the executable from source:
 
 ```
-    :~$ cd ./adsb-decoder
+    :~$ cd adsb-decoder
     :~$ mkdir build
     :~$ cd build
     :~$ cmake ..
     :~$ make
+```
+
+(Needs to be tested)
+For Windows using Microsoft Visual Studio 17:
+```
+    directory> cd adsb-decoder
+    adsb-decoder> cmake -G "Visual Studio 17" .
+    adsb-decoder> cmake --build . --target ALL_BUILD --config Release
+    
 ```
 
 ## Execute
@@ -59,9 +69,9 @@ Copyright (C) Aviware 2022
 
 ## Example Messages
 
-'''
+```
     8d3b756b251811b4c39e6082017d
     8d4d21c8230d8271e14460b21522
     8d4a1b41232d2439c30c60c0a9c5
     8d5083c92305527708382090690c
-'''
+```
