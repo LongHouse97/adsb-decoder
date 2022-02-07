@@ -45,8 +45,6 @@ For Windows using Microsoft Visual Studio 17:
 
 ## Execute
 
-Start the ROS master node
-
 ```
     :~$ ./src/adsb-decoder
 ```
