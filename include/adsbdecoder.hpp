@@ -23,7 +23,7 @@ namespace aviware
 
             void setMessage(AdsbMessage* message) { m_message = message; }
 
-            void callsign(char* callsign);
+            std::string dataContent();
 
             void downlinkFormat(int &format);
 

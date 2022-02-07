@@ -27,6 +27,8 @@ namespace aviware
 
             void update();
 
+            void run();
+
         private:
 
             void createRawMessage();

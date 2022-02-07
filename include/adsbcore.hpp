@@ -26,6 +26,10 @@ namespace aviware
 
             void update();
 
+            void run();
+
+            void cycleOnce();
+
         private:
 
             AdsbHandlerPtr m_handler = nullptr;

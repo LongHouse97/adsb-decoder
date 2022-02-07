@@ -47,6 +47,14 @@ void AdsbHandler::update()
     }
 }
 
+void AdsbHandler::run()
+{
+    while(true)
+    {
+        update();
+    }
+}
+
 void AdsbHandler::setDecoderData()
 {
     m_decoder->setMessage(m_message.get());
@@ -95,10 +103,8 @@ void AdsbHandler::printMessage()
     
     auto tcResult = m_decoder->typeCode();
     std::cout << "TypeCode: " << std::get<0>(tcResult) << " | " << std::get<1>(tcResult) << std::endl;
-
-    char callsign[9];
-    m_decoder->callsign(callsign);
-    std::cout << "Callsign: " << callsign << std::endl;
+    
+    std::cout << "Data Content: " << m_decoder->dataContent() << std::endl;
 
     auto ecResult = m_decoder->emitterCategory();
     std::cout << "Emitter Code: " << std::get<0>(ecResult) << " | " << std::get<1>(ecResult) << std::endl;

@@ -21,8 +21,11 @@ int main(int argc, char** argv)
     }
     // instantiate core 
     aviware::adsb::AdsbCore core;
-    core.setData(data.c_str());
-    core.update();
+    //core.setData(data.c_str());
+    
+    //core.cycleOnce();
+    
+    core.run();
 
     return 0;
 }

@@ -22,23 +22,25 @@ AdsbDecoder::~AdsbDecoder()
 
 }
 
-void AdsbDecoder::callsign(char* callsign)
+std::string AdsbDecoder::dataContent()
 {
+    char msg[9];
+
+    msg[8] = '\0';
+
     if (!m_message)
     {
         std::cout << "Error: Message not Set!\n";
-        return;
+        return "Error";
     }
-
-    callsign[8] = '\0';
 
     for (size_t i = 0; i < 8; i++)
     {
         m_message->data.content.at(i).to_ulong() < 27 ?
-            callsign[i] = char(m_message->data.content.at(i).to_ulong() + 64) :
-            callsign[i] = char(m_message->data.content.at(i).to_ulong());
+            msg[i] = char(m_message->data.content.at(i).to_ulong() + 64) :
+            msg[i] = char(m_message->data.content.at(i).to_ulong());
     }
-    
+    return msg;
 }
 
 void AdsbDecoder::downlinkFormat(int &format)
@@ -106,7 +108,7 @@ std::tuple<int, std::string> AdsbDecoder::typeCode()
     int code = 0;
     std::string content = "";
     code = m_message->data.tc.to_ulong();
-    code = 1;
+
     switch (code)
     {
     case 1: case 2: case 3:

@@ -56,11 +56,12 @@ void AdsbData::compute()
 
     for (size_t i = 0; i < 5; i++)
     {
-        tc[i] = data[i];
+        tc[4 - i] = data[i];
     }
     
     for (size_t i = 0; i < 3; i++)
     {
-        ec[i] = data[i + 5];
+        ec[2 - i] = data[i + 5];
     }
+
 }

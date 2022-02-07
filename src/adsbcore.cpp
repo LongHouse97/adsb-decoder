@@ -5,6 +5,9 @@
 // Date: 06 Feb 2022
 //
 
+#include <iostream>
+#include <thread>
+
 #include "adsbcore.hpp"
 #include "adsbhandler.hpp"
 
@@ -24,6 +27,26 @@ AdsbCore::~AdsbCore()
 void AdsbCore::update()
 {
     m_handler->update();
+}
+
+void AdsbCore::run()
+{
+    //std::thread handlerThread(&AdsbHandler::run, m_handler.get());
+    while(true)
+    {
+        std::string data = "";
+        std::cout << "\n\nEnter ADS-B Message: ";
+        std::cin >> data;
+        std::cout << "\n";
+        setData(data);
+        update();
+    }
+    //handlerThread.join();
+}
+
+void AdsbCore::cycleOnce()
+{
+    update();
 }
 
 void AdsbCore::setData(const std::string &data)
