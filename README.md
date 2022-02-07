@@ -56,3 +56,12 @@ Now you can start to enter ADS-B messages through the console.
 ## License
 
 Copyright (C) Aviware 2022
+
+## Example Messages
+
+'''
+    8d3b756b251811b4c39e6082017d
+    8d4d21c8230d8271e14460b21522
+    8d4a1b41232d2439c30c60c0a9c5
+    8d5083c92305527708382090690c
+'''
