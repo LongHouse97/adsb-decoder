@@ -7,7 +7,7 @@
 
 cmake_minimum_required(VERSION 3.16.3)
 
-project(ads-b_decoder LANGUAGES CXX VERSION 0.1.0)
+project(ads-b_decoder LANGUAGES CXX VERSION 1.0.0)
 set(package_release 1$ENV{CUSTOM_BUILD_TAG})
 
 add_compile_options("$<$<COMPILE_LANGUAGE:CXX>:-Wall>")
